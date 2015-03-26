@@ -28,6 +28,21 @@ namespace ProjectGuru99
 
             return false;
         }
+        public static int getIndexofElementinList(IList<IWebElement> list,string itemTextTofind)
+        {
+            int count = 0;
+            foreach(IWebElement item in list)
+            {
+                if(item.Text.CompareTo(itemTextTofind)==0)
+                {
+                    return count;
+
+                }
+                count++;
+            }
+            return -1;
+
+        }
      
     
     }

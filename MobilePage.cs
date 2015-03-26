@@ -127,35 +127,48 @@ namespace ProjectGuru99
         {
             //AddToComparelinks[first].Click();
             //AddToComparelinks[second].Click();
-            int i = 0;
+           // int i = 0;
 
-            foreach(IWebElement item in items)
+            //foreach(IWebElement item in items)
+            //{
+            //    string ItemText = item.Text;
+            //    if (ItemText.CompareTo(first.ToUpper()) == 0)
+            //    {
+            //        AddToComparelinks[i].Click();
+            //        break;
+            //    }
+
+            //    i++;
+            //}
+            int firstItemPosition = Helper.getIndexofElementinList(items,first.ToUpper());
+            if(firstItemPosition!=-1)
             {
-                string ItemText = item.Text;
-                if (ItemText.CompareTo(first.ToUpper()) == 0)
-                {
-                    AddToComparelinks[i].Click();
-                    break;
-                }
-
-                i++;
+                AddToComparelinks[firstItemPosition].Click();
             }
 
-            items = _Driver.FindElements(By.CssSelector("h2.product-name"));
 
-            i = 0;
+           // items = _Driver.FindElements(By.CssSelector("h2.product-name"));
 
-            foreach (IWebElement item in items)
+            int secondItemPosition = Helper.getIndexofElementinList(items, second.ToUpper());
+            if(secondItemPosition!=-1)
             {
-                string ItemText = item.Text;
-                if (ItemText.CompareTo(second.ToUpper()) == 0)
-                {
-                    AddToComparelinks[i].Click();
-                    break;
-                }
-
-                i++;
+                AddToComparelinks[secondItemPosition].Click();
             }
+
+
+            //i = 0;
+
+            //foreach (IWebElement item in items)
+            //{
+            //    string ItemText = item.Text;
+            //    if (ItemText.CompareTo(second.ToUpper()) == 0)
+            //    {
+            //        AddToComparelinks[i].Click();
+            //        break;
+            //    }
+
+            //    i++;
+            //}
 
         }
         public void clickCompare(string first, string second)

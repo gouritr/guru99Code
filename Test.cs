@@ -61,5 +61,16 @@ namespace ProjectGuru99
             d.verifythePricedisplayed(priceInList);
 
         }
+        [Test]
+        public void CompareMobiles()
+        {
+            Homepage h = new Homepage(driver);
+            PageFactory.InitElements(driver, h);
+            h.vfTitle();
+            MobilePage m = h.clickMobile();
+            m.vfbileTitle();
+            m.AddToCompare("Samsung Galaxy","Sony Xperia");
+            m.clickCompare("Samsung Galaxy", "Sony Xperia");
+        }
     }
 }

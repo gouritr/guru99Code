@@ -22,7 +22,13 @@ namespace ProjectGuru99
         IWebElement selectSortBy;
 
         [FindsBy(How= How.CssSelector,Using=".product-name")]
-        IList<IWebElement> items; 
+        IList<IWebElement> items;
+
+        [FindsBy(How = How.CssSelector, Using = ".link-compare")]
+        IList<IWebElement> AddToComparelinks;
+
+        [FindsBy(How = How.CssSelector, Using = "button[title='Compare']")]
+        IWebElement btnCompare;
 
         public void SortByName()
         {
@@ -117,5 +123,58 @@ namespace ProjectGuru99
             return null;
         }
 
+        public void AddToCompare(string first,string second)
+        {
+            //AddToComparelinks[first].Click();
+            //AddToComparelinks[second].Click();
+            int i = 0;
+
+            foreach(IWebElement item in items)
+            {
+                string ItemText = item.Text;
+                if (ItemText.CompareTo(first.ToUpper()) == 0)
+                {
+                    AddToComparelinks[i].Click();
+                    break;
+                }
+
+                i++;
+            }
+
+            items = _Driver.FindElements(By.CssSelector("h2.product-name"));
+
+            i = 0;
+
+            foreach (IWebElement item in items)
+            {
+                string ItemText = item.Text;
+                if (ItemText.CompareTo(second.ToUpper()) == 0)
+                {
+                    AddToComparelinks[i].Click();
+                    break;
+                }
+
+                i++;
+            }
+
+        }
+        public void clickCompare(string first, string second)
+        {
+            
+            string currentHandle = _Driver.CurrentWindowHandle;
+            PopupWindowFinder finder = new PopupWindowFinder(_Driver);
+            string newpopupHandle = finder.Click(btnCompare);
+            _Driver.SwitchTo().Window(newpopupHandle);
+            string PopupTitle = _Driver.FindElement(By.CssSelector("h1")).Text;
+            Assert.That("COMPARE PRODUCTS".CompareTo(PopupTitle) == 0);
+
+            IList<IWebElement> DisplayedProducts = _Driver.FindElements(By.CssSelector("h2.product-name"));
+
+            Assert.That(Helper.CheckifElementExistByText(DisplayedProducts,first.ToUpper()),"First Item not found in the popup");
+            Assert.That(Helper.CheckifElementExistByText(DisplayedProducts,second.ToUpper()),"Second Item not found in the popup");
+            
+            _Driver.FindElement(By.CssSelector("button[title='Close Window']")).Click();
+
+        }
     }
 }

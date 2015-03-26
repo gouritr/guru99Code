@@ -16,6 +16,18 @@ namespace ProjectGuru99
             wait.Until(ExpectedConditions.ElementIsVisible(by));
         }
 
+        public static bool CheckifElementExistByText(IList<IWebElement> list, string itemTexttoFind)
+        {
+            foreach(IWebElement i in list)
+            {
+                if(i.Text.CompareTo(itemTexttoFind) == 0)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
      
     
     }

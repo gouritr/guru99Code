@@ -14,6 +14,10 @@ namespace ProjectGuru99
     class MobilePage:BasePage
     {
         string expectedTitle = "Mobile";
+        
+
+         [FindsBy(How = How.CssSelector,Using=".link-wishlist")]
+        IList<IWebElement> linkAddToWishLIst;
 
         [FindsBy(How = How.CssSelector,Using="button[title='Add to Cart']")]
         IWebElement btnAddToCart;
@@ -187,6 +191,23 @@ namespace ProjectGuru99
             Assert.That(Helper.CheckifElementExistByText(DisplayedProducts,second.ToUpper()),"Second Item not found in the popup");
             
             _Driver.FindElement(By.CssSelector("button[title='Close Window']")).Click();
+
+        }
+        public myWishListPage addtowishlist(string itemName)
+        {
+            int position = Helper.getIndexofElementinList(items, itemName);
+            if (position != -1)
+            {
+                linkAddToWishLIst[position].Click();
+            }
+            else
+            {
+                Console.WriteLine("ItemNotFound");
+            }
+
+            myWishListPage W = new myWishListPage(_Driver);
+            PageFactory.InitElements(_Driver, W);
+            return W;
 
         }
     }

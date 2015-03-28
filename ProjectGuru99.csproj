@@ -51,13 +51,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BasePage.cs" />
+    <Compile Include="CreateAccountPage.cs" />
+    <Compile Include="CustomerAccountPage.cs" />
     <Compile Include="DetailsPage.cs" />
     <Compile Include="Helper.cs" />
+    <Compile Include="myWishListPage.cs" />
+    <Compile Include="shareWishListPage.cs" />
     <Compile Include="ShoppingCartPage.cs" />
     <Compile Include="Test.cs" />
     <Compile Include="Homepage.cs" />
     <Compile Include="MobilePage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="userHomePage.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

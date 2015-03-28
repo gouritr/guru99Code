@@ -16,6 +16,9 @@ namespace ProjectGuru99
 
         [FindsBy(How = How.LinkText,Using = "MOBILE")]
         IWebElement linkMobile;
+
+        [FindsBy(How = How.LinkText, Using = "MY ACCOUNT")]
+        IWebElement linkMyaccount;
         
           public  Homepage(IWebDriver driver):base(driver)
         {
@@ -37,7 +40,13 @@ namespace ProjectGuru99
             string actual = _Driver.Title.ToString();
             Assert.AreEqual(expectedTitle, actual);
         }
-
+        public CustomerAccountPage clickMyAccount()
+        {
+           linkMyaccount.Click();
+           CustomerAccountPage C =  new CustomerAccountPage(_Driver);
+           PageFactory.InitElements(_Driver, C);
+           return C;
+        }
         
     }
 }

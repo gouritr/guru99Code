@@ -33,7 +33,7 @@ namespace ProjectGuru99
             int count = 0;
             foreach(IWebElement item in list)
             {
-                if(item.Text.CompareTo(itemTextTofind)==0)
+                if(item.Text.CompareTo(itemTextTofind.ToUpper())==0)
                 {
                     return count;
 

@@ -12,10 +12,12 @@ namespace ProjectGuru99
 {
     public class Test
     {
-        IWebDriver driver = new FirefoxDriver();
+        IWebDriver driver;
+
        [SetUp]
         public void setup()
         {
+           driver = new FirefoxDriver();
             driver.Navigate().GoToUrl("http://live.guru99.com/index.php/");
             driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(10));
         }
@@ -71,6 +73,23 @@ namespace ProjectGuru99
             m.vfbileTitle();
             m.AddToCompare("Samsung Galaxy","Sony Xperia");
             m.clickCompare("Samsung Galaxy", "Sony Xperia");
+        }
+
+    [Test]
+        public void VerifyAccountCreationAndWishListAddition()
+        {
+            Homepage h = new Homepage(driver);
+            PageFactory.InitElements(driver, h);
+            h.vfTitle();
+            CustomerAccountPage CustAccount = h.clickMyAccount();
+            CreateAccountPage CA = CustAccount.ClickCreateAccount();
+            userHomePage U = CA.Register("Abc","XYZ","abc2@abc.com","123456");
+            MobilePage M = U.ClickLinkMobile();
+            myWishListPage W = M.addtowishlist("Sony Xperia");
+            W.verifySuccessdisplayedforWishlistItem("Sony Xperia");
+            shareWishListPage S = W.clickShareWishListPage();
+            W =  S.clickShareWishList("abc@abc.com", "hi");
+            W.verifyWishlistShared();
         }
     }
 }
